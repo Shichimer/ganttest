@@ -381,39 +381,6 @@ export default function App() {
           </div>
         </div>
 
-        {selected ? (
-          <div className="space-y-2">
-            <div className="text-sm font-medium">選択タスク</div>
-            <input className="w-full px-2 py-1 border rounded" value={selected.name} onChange={(e) => setTasks(tasks.map(t => t.id===selected.id ? {...t, name:e.target.value} : t))} />
-            <div className="grid grid-cols-2 gap-2">
-              <label className="text-xs">開始日
-                <input type="date" className="w-full mt-1 px-2 py-1 border rounded" value={selected.start}
-                  onChange={(e) => setTasks(tasks.map(t => t.id===selected.id ? {...t, start: fmt(parseDate(e.target.value))} : t))}/>
-              </label>
-              <label className="text-xs">終了日
-                <input type="date" className="w-full mt-1 px-2 py-1 border rounded" value={selected.end}
-                  onChange={(e) => setTasks(tasks.map(t => t.id===selected.id ? {...t, end: fmt(parseDate(e.target.value))} : t))}/>
-              </label>
-            </div>
-            <label className="text-xs">色
-              <input type="color" className="w-full mt-1 h-10 border rounded" value={selected.color || "#60a5fa"}
-                onChange={(e) => setTasks(tasks.map(t => t.id===selected.id ? {...t, color: e.target.value} : t))}/>
-            </label>
-            <div className="text-xs">依存関係（前提タスクID）</div>
-            <div className="flex flex-wrap gap-2">
-              {selected.deps.map((d) => (
-                <span key={d} className="px-2 py-1 bg-gray-100 rounded text-xs flex items-center gap-1">
-                  {d}
-                  <button className="text-red-600" onClick={() => setTasks(tasks.map(t => t.id===selected.id ? {...t, deps: t.deps.filter(x=>x!==d)} : t))}>×</button>
-                </span>
-              ))}
-            </div>
-            <button className="px-3 py-1 rounded bg-red-600 text-white" onClick={() => deleteTask(selected.id)}>タスク削除</button>
-          </div>
-        ) : (
-          <div className="text-sm text-gray-500">タスクを選択すると編集できます。</div>
-        )}
-
         <div className="mt-auto text-xs text-gray-400">
           保存: 自動（localStorage） / 共有: 共有リンク
         </div>
