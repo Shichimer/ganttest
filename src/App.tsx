@@ -1,4 +1,3 @@
-\
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import LZString from "lz-string";
 
@@ -390,7 +389,8 @@ export default function App() {
         <div className="sticky top-0 z-10 bg-white border-b" style={{ height: HEADER_HEIGHT }}>
           <div className="relative" style={{ width: totalDays * dayWidth, height: HEADER_HEIGHT }}>
             <div className="absolute inset-0">
-              {daysArr.map((d, i) => {
+              {Array.from({length: totalDays + 1}).map((_, i) => {
+                const d = addDays(minDate, i);
                 const isFirst = d.getDate() === 1 || i === 0;
                 return (
                   <div key={i} className={`absolute top-0 h-full ${isFirst ? "bg-gray-50" : ""}`}
@@ -406,7 +406,7 @@ export default function App() {
 
         <div className="relative" style={{ width: totalDays * dayWidth, height: tasks.length * ROW_HEIGHT + HEADER_HEIGHT }}>
           <div className="absolute inset-0">
-            {daysArr.map((d, i) => (
+            {Array.from({length: totalDays + 1}).map((_, i) => (
               <div key={i} className="absolute top-0 bottom-0"
                 style={{ left: i * dayWidth, width: 1, background: i % 7 === 0 ? "#e2e8f0" : "#f1f5f9" }}/>
             ))}
